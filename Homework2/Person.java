@@ -22,11 +22,11 @@ public class Person {
     public void setYear(int birthYear){
         this.birthYear=birthYear;
     }
-    public void inputInfo(String name, int birthYear){
+    public void input(String name, int birthYear){
         this.name=name;
         this.birthYear=birthYear;
     }
-    public void outputInfo(){
+    public void output(){
         System.out.println(this.toString());
     }
     public int age(){
@@ -41,8 +41,10 @@ public class Person {
         Person person1=new Person("Stas", 1999);
         Person person2=new Person("Vitya", 1973);
         Person person3=new Person();
-        person3.inputInfo("Oleg", 2001);
-        person2.outputInfo();
+        person3.input("Oleg", 2001);
+        Person person4=new Person("Yulia",1991);
+        Person person5=new Person("Sveta",1980);
+
     }
 
 }
