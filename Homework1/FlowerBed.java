@@ -15,7 +15,8 @@ public class FlowerBed{
         circle_area=PI*flowerBed.radius*flowerBed.radius;
         circle_perimeter=2*PI*flowerBed.radius;
         System.out.println("Area is "+circle_area);
-        System.out.println("Perimeter is "+circle_perimeter);
+        System.out.printf("Perimeter is "+"%.2f",circle_perimeter);
+        System.out.println();
         System.out.println("Enter length of a wire:");
         double wire_length=scanner.nextDouble();
         if(wire_length>=circle_perimeter) System.out.println("Is able to fence");
