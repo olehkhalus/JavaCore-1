@@ -1,10 +1,8 @@
-package HOME_WORK.com.example.homework.task;
-
+package HomeWork;
 
 import java.util.Scanner;
 
 public class FigureTask {
-
     public static void main(String[] args)
     {
         Scanner sc = new Scanner(System.in);
@@ -27,6 +25,4 @@ public class FigureTask {
         }
     }
 }
-
-
 
