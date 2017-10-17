@@ -1,9 +1,6 @@
-package EnumArraysAlgorithms.PrackticalTask;
+package Arrays;
 
-/**
- * Created by golov on 17.10.2017.
- */
-public class Employee {
+public class Employee implements Comparable {
 
     private String name;
     private Department departmantName;
@@ -33,8 +30,7 @@ public class Employee {
         this.salary = salary;
     }
 
-
-    public Employee(String name, Department departmentName, double salary) {
+    public Employee(String name, Department departmantName, double salary) {
         this.name = name;
         this.departmantName = departmantName;
         this.salary = salary;
@@ -42,6 +38,20 @@ public class Employee {
 
     public enum Department {
         DEPARTMENT_1, DEPARTMENT_2, DEPARTMENT_3
+    }
+
+    public int compareTo(Object obj)
+    {
+        Employee tmp = (Employee) obj;
+        if(this.salary < tmp.salary)
+        {
+            return -1;
+        }
+        else if(this.salary > tmp.salary)
+        {
+            return 1;
+        }
+        return 0;
     }
 
 
