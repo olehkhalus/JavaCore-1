@@ -1,10 +1,10 @@
-package EnumArraysAlgorithms.PrackticalTask;
+package Arrays;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Scanner;
 
-/**
- * Created by golov on 17.10.2017.
- */
 public class Test {
     public static void main(String[] args) {
 
@@ -20,12 +20,22 @@ public class Test {
         Scanner scn = new Scanner(System.in);
         String worker = scn.nextLine();
 
-        int workerCount  = 0;
-        while (workerCount < employees.length) {
-            if (worker.equals(employees[workerCount].getDepartmantName().name())) {
-                System.out.println(employees[workerCount].getName());
+        for (Employee employee : employees) {
+            if (worker.equals(employee.getDepartmantName().name())) {
+                System.out.println(employee.getName());
             }
-            workerCount++;
+        }
+        System.out.println("ascending ordering");
+        Arrays.sort(employees);
+        for(int i = 0; i < employees.length; i++)
+        {
+            System.out.println(employees[i].getName()+" has salary "+employees[i].getSalary());
+        }
+        System.out.println("descending ordering");
+        Arrays.sort(employees, Collections.reverseOrder());
+        for(int i = 0; i < employees.length; i++)
+        {
+            System.out.println(employees[i].getName()+" has salary "+employees[i].getSalary());
         }
     }
 }
