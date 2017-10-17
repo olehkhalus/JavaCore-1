@@ -1,8 +1,15 @@
-package HomeWork;
+package main.java;
 
 import java.util.Scanner;
 
 public class FigureTask {
+    /**Write a program to display the pattern
+     * like a pyramid using asterisk and each
+     * row contain an odd number of asterisks.
+       *
+      ***
+     *****
+     */
     public static void main(String[] args)
     {
         Scanner sc = new Scanner(System.in);

@@ -1,8 +1,10 @@
-package HomeWork;
+package main.java;
 
 import java.util.*;
 
 import static java.lang.Math.PI;
+import java.io.PrintStream;
+import static java.lang.System.out;
 
 public class bed {
     private String name;
@@ -14,27 +16,24 @@ public class bed {
     public static void main(String[] args){
         Scanner scanner=new Scanner(System.in);
 
-        double circle_perimeter, circle_area;
+        double circlePerimeter, circleArea;
 
-        System.out.println("Enter the name of  Bed and it's radius");
+        out.print("Enter the name of  Bed and it's radius");
 
         bed flowerBed = new bed(scanner.nextLine(), scanner.nextDouble());
 
-        circle_area = PI*flowerBed.radius*flowerBed.radius;
+        circleArea = PI*flowerBed.radius*flowerBed.radius;
 
-        circle_perimeter = 2*PI*flowerBed.radius;
+        circlePerimeter = 2*PI*flowerBed.radius;
 
-        System.out.println("area is "+circle_area);
-
-        System.out.printf("perimeter is "+"%.2f",circle_perimeter);
-
-        System.out.println();
-
-        System.out.println("enter length of a wire:");
+       out.print("area is "+circleArea);
+       out.printf("perimeter is "+"%.2f",circlePerimeter);
+        out.println();
+        out.print("enter length of a wire:");
 
         double wire_length = scanner.nextDouble();
 
-        if(wire_length >= circle_perimeter) System.out.println("Is able to fence");
+        if(wire_length >= circlePerimeter) System.out.println("Is able to fence");
 
         else System.out.println("not able to fence");
     }
