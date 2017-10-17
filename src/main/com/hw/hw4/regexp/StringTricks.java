@@ -5,8 +5,7 @@ import java.util.Arrays;
 public class StringTricks {
     
     private static String[] splitter(String str) {
-        String[] result = str.split("\\s");
-            return result;
+        return str.split("\\s");
     }
 
     public static String remSpaces(String str) {
@@ -14,17 +13,17 @@ public class StringTricks {
     }
 
     public static String reverse(String str) {
-        return new StringBuffer(str).reverse().toString();
+        return new StringBuilder(str).reverse().toString();
     }    
 
+// TODO method chaining with getmaxlenword
     public static int countChar(String str) {
         return str.length();
     }
 
     public static String getMaxLenWord(String str) {
-        String[] arr = splitter(str); 
         String res = "";
-        for (String s : arr) {
+        for (String s : splitter(str)) {
             if (s.length() > res.length()) {
                 res = s;
             }

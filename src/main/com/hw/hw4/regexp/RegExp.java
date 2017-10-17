@@ -9,8 +9,8 @@ public class RegExp {
         String[] ar = s.toLowerCase().trim().replaceAll(" +", " ").split("\\s");
         String[] ar_ = s_.toLowerCase().trim().replaceAll(" +", " ").split("\\s");;
              for (String i : ar) {
-                for (String j : ar_) {
-                    if (i.equals(j)) {
+                for (String k : ar_) {
+                    if (i.equals(k)) {
                         res = true;
                     }
                 }
@@ -18,11 +18,10 @@ public class RegExp {
         return res;
     }
 
-    public static boolean findPatMatch(String pattern, String text) {
-        Pattern ptrn = Pattern.compile(pattern);
-        Matcher mtch = ptrn.matcher(text);
-        if (mtch.matches()) {
-            mtch.reset();
+    public static boolean findPatMatch(String pt, String txt) {
+        Pattern pattern = Pattern.compile(pt);
+        Matcher match = pattern.matcher(txt);
+        if (match.matches()) {
             return true;
         } else {
             return false;

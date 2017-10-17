@@ -7,25 +7,27 @@ public class InputController {
     private static final Pattern PATTERN = Pattern.compile("[A-Za-z0-9_]{3,15}");
     private static Matcher MATCH;
 
-    public  static void setF(String s) {
+    public  static void setForename(String s) {
         if ((MATCH = PATTERN.matcher(s)).matches()) {
             IN.setFirstName(s);
         } else {
-            throw new IllegalArgumentException("Valid name required");
+            throw new IllegalArgumentException("Valid name required (capital and lowercase letters, numbers and underscores are legal symbols)");
         }
     }
-    public  static void setM(String s) {
+
+    public  static void setPatronymic(String s) {
         if ((MATCH = PATTERN.matcher(s)).matches()) {
             IN.setMiddleName(s);
         } else {
-            throw new IllegalArgumentException("Valid name required");
+            throw new IllegalArgumentException("Valid name required (capital and lowercase letters, numbers and underscores are legal symbols)");
         }
     }
-       public  static void setL(String s) {
+
+    public  static void setSurname(String s) {
         if ((MATCH = PATTERN.matcher(s)).matches()) {
             IN.setLastName(s);
         } else {
-            throw new IllegalArgumentException("Valid name required");
+            throw new IllegalArgumentException("Valid name required (capital and lowercase letters, numbers and underscores are legal symbols)");
         }
     }
 }
