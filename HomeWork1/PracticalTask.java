@@ -1,4 +1,4 @@
-package com.veboro;
+package HomeWork1;
 
 import java.util.Calendar;
 import java.util.Scanner;
