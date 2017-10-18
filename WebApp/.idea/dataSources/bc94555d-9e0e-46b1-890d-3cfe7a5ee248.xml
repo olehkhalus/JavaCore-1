@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="ca55914_java@vh56.timeweb.ru">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.4">
+    <root id="1"/>
+    <schema id="2" parent="1" name="ca55914_java">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="information_schema"/>
+    <table id="4" parent="2" name="PRODUCT"/>
+    <column id="5" parent="4" name="CODE">
+      <Position>1</Position>
+      <DataType>varchar(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="6" parent="4" name="NAME">
+      <Position>2</Position>
+      <DataType>varchar(128)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="7" parent="4" name="PRICE">
+      <Position>3</Position>
+      <DataType>float|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="8" parent="4" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>CODE</ColNames>
+      <Primary>1</Primary>
+    </key>
+  </database-model>
+</dataSource>
