@@ -1,4 +1,9 @@
 import java.util.*;
+/*Enter in the console sentence of five words. 
+1)display the longest word in the sentence
+2)determine the number of its letters
+3)bring the second word in reverse order*/
+
 public class StringTask {
     public static void main(String... args){
         String maxLengthWord="";
