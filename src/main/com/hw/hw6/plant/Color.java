@@ -4,6 +4,11 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
 
+/*
+ * https://codereview.stackexchange.com/questions/46175/java-enum-containing-a-hash-map-for-look-up
+ *
+ */
+
 public enum Color {
     UNKNOWN(0, "UNKNOWN"),
     RED(1, "Red"),
