@@ -1,3 +1,8 @@
+/*Enter surname, name and patronymic on the console as a variable of type String. Output on the console:
+1)surnames and initials
+2)name
+3)name, middle name and last name*/
+
 public class Person {
     private String surname;
     private String name;
