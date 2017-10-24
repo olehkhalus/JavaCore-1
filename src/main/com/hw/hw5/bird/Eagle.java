@@ -1,9 +1,9 @@
 package com.hw.hw5.bird;
 
 public class Eagle extends FlyingBird {
+    private static final String BIRD_TYPE = "Eagle";
     
     protected String fly() {
-        return "Eagle's flying...";
+        return String.format("%s %s", BIRD_TYPE, super.fly());
     }
-
 }
