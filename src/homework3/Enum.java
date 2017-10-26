@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.lang.String;
 
 public class Enum {
-    enum Continents {
+    public enum Continents {
         EUROPE, ASIA, NORTHAMERICA, SOUTHAMERICA;
     }
 
