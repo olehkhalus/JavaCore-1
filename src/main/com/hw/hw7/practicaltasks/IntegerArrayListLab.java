@@ -11,14 +11,14 @@ public class IntegerArrayListLab {
 
     public IntegerArrayListLab(int size, int min, int max) {
         nums = new ArrayList<Integer>();
-        initialise(size, min, max);
+        init(size, min, max);
     }
 
     public List<Integer> getNums() {
         return nums;
     }
 
-    private void initialise(int size, int min, int max) {
+    private void init(int size, int min, int max) {
         while (nums.size() < size) {
                 nums.add(ThreadLocalRandom.current().nextInt(min, max));
         }
