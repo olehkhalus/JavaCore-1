@@ -1,16 +1,32 @@
 package com.hw.hw7.person;
 
-import java.util.Map;
-import java.util.HashMap;
-
 public class Person {
-    protected static final Map<String, String> personMap = new HashMap<>();
+    
+    private String name;
+    private String surname;
 
-    protected static void initialize(String firstName, String lastName) {
-        personMap.put(firstName, lastName);
+    public Person() {
+        this("UNKNOWN", "UNKNOWN");
     }
 
-    protected static void remove(String name) {
-        personMap.remove(name);
+    public Person(String name, String surname) {
+        this.name = name;
+        this.surname = surname;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 }
