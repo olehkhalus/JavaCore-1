@@ -11,7 +11,7 @@ public class InputController {
         if ((MATCH = PATTERN.matcher(s)).matches()) {
             IN.setFirstName(s);
         } else {
-            throw new IllegalArgumentException("Valid name required (capital and lowercase letters, numbers and underscores are legal symbols)");
+            throw new IllegalArgumentException("Valid name required (uppercase, numbers, underscores are legal symbols)");
         }
     }
 
@@ -19,7 +19,7 @@ public class InputController {
         if ((MATCH = PATTERN.matcher(s)).matches()) {
             IN.setMiddleName(s);
         } else {
-            throw new IllegalArgumentException("Valid name required (capital and lowercase letters, numbers and underscores are legal symbols)");
+            throw new IllegalArgumentException("Valid name required (uppercase, numbers, underscores are legal symbols)");
         }
     }
 
@@ -27,7 +27,7 @@ public class InputController {
         if ((MATCH = PATTERN.matcher(s)).matches()) {
             IN.setLastName(s);
         } else {
-            throw new IllegalArgumentException("Valid name required (capital and lowercase letters, numbers and underscores are legal symbols)");
+            throw new IllegalArgumentException("Valid name required (uppercase, numbers, underscores are legal symbols)");
         }
     }
 }

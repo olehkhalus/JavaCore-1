@@ -3,24 +3,24 @@ package com.hw.hw6;
 public class ExepFunctions {
 
     /**
-     *  Accepts two double values and 
+     *  Accepts two double vals and 
      *  returns it's fraction
      *
-     *  @param diviser must not be 0
+     *  @param divisor must not be 0
      *  @return division of two rational numbers
      */
-    public static double div(double divident, double diviser) {
-        if (diviser != 0) {
-            return divident / diviser;
+    public static double div(double divident, double divisor) {
+        if (divisor != 0) {
+            return divident / divisor;
         } else {
-            throw new IllegalArgumentException("Diviser cannot be zero");
+            throw new IllegalArgumentException("Divisor cannot be zero");
         }
     } 
 
     /**
      *  Accepts three integers numbers and checks whether 
-     *  num is an integer such that num is greater than or equal to start  is less than or equal to NN
-     *  num is an integer such that num is within the interval [start...end]
+     *  num is an integer such that num is greater than or equal to 'start' and is less than or equal to 'end'
+     *  e.g. num is an integer such that num is within the interval [start...end]
      *  e.g. num ∈ Z : start ≤ num ≤ end
      * 
      *  @param three integers
@@ -38,9 +38,9 @@ public class ExepFunctions {
     }
 
     /**
-     *  Accepts two double values and 
-     *  returns it's product e.g. rectangle's area
-    *
+     *  Accepts two double vals and 
+     *  returns it's product 
+     *  e.g. rectangle's area
      *  @param a and b must be greater than 0
      *  @return product of two rational numbers
      */
@@ -51,7 +51,7 @@ public class ExepFunctions {
    
     private static void verifyArgs(int a, int b) {
         if (a < 0 || b < 0) {
-            throw new IllegalArgumentException("Only positive integers are allowed as rectangle's length and width");
+            throw new IllegalArgumentException("Only positive integers are allowed");
         }
     }
 }

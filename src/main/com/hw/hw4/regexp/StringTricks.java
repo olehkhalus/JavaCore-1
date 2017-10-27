@@ -12,11 +12,10 @@ public class StringTricks {
         return str.trim().replaceAll(" +", " ");
     }
 
-    public static String reverse(String str) {
+    public static String getReverse(String str) {
         return new StringBuilder(str).reverse().toString();
     }    
 
-// TODO method chaining with getmaxlenword
     public static int countChar(String str) {
         return str.length();
     }
