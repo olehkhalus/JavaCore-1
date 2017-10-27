@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class StringTricks {
     
     private static String[] splitter(String str) {
-        return str.split("\\s");
+        return str.split("s");
     }
 
     public static String remSpaces(String str) {
