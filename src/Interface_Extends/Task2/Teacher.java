@@ -3,7 +3,7 @@ package Interface_Extends.Task2;
 public class Teacher extends Staff {
     public static final String TYPE_PERSON = "Teacher";
 
-    public Teacher() {    }
+
 
     public Teacher(String name, int hours, double wage) {
         super(name, hours, wage);

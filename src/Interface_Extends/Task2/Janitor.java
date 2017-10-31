@@ -3,7 +3,7 @@ package Interface_Extends.Task2;
 public class Janitor extends Staff{
     public static final String TYPE_PERSON = "Janitor";
 
-    public Janitor() {    }
+
 
     public Janitor(String name, double salary) {
         super(name, salary);

@@ -5,7 +5,7 @@ public abstract class Staff extends Person {
     protected double wage;
     protected double salary;
 
-    public Staff() {    }
+
 
     public Staff(String name, double salary) {
         super(name);
