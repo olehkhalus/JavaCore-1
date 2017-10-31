@@ -1,0 +1,3 @@
+7
+Prepare mytext.txt file with a lot of text inside.
+Vsevolod, 12/01/1984
