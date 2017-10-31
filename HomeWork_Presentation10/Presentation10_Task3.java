@@ -17,6 +17,13 @@ class T extends Thread {
         for ( int i = 0 ; i < iterations ; i++) {
             System.out.println("Thread number" + number);
         }
+        if ( iterations == 0 ) {
+            new T(" two" , 3).run();
+        } else if ( iterations == 3 ) {
+            new T(" three" , 5 ).run();
+        } else if ( iterations > 3 ) {
+            System.out.println("Finaly!!!!");
+        }
     }
 
 }
@@ -26,25 +33,10 @@ class T extends Thread {
 public class Presentation10_Task3 {
     public static void main( String[] Args) {
         T thread1 = new T ("one" , 0);
-        T thread2 = new T ("two" , 3);
-        T thread3 = new T ("three" , 5);
+        
 
         thread1.run();
-        try {
-            thread1.join();
-        } catch (InterruptedException e) {
-
-        }
-
-        thread2.run();
-        try {
-            thread2.join();
-        } catch (InterruptedException e) {
-
-        }
-
-        thread3.run();
-
+        
 
 
 
