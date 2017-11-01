@@ -1,0 +1,5 @@
+shortest string
+Lorem Ipsum is simply dummy
+scrambled it to make a type specimen
+this is the longest string in this file
+hello friends
