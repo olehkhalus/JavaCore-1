@@ -7,13 +7,19 @@ import java.nio.file.*;
 import java.nio.charset.Charset;
 
 public class InputLab {
-    public static final Path FILE_PATH = Paths.get("input.txt");
-    public static final Charset ENCODING = Charset.forName("UTF-8");
-    public static final List<String> CONTENT = init();
-    public static final Comparator<String> BY_LENGTH = (s1, s2) -> Integer.compare(s1.length(), s2.length());
+    private static Path FILE_PATH;
+    private static Charset ENCODING;
+    public static List<String> CONTENT;
+    private static final Comparator<String> BY_LENGTH = (s1, s2) -> Integer.compare(s1.length(), s2.length());
+
+    public InputLab(String path, String charset) {
+        FILE_PATH = Paths.get(path);
+        ENCODING = Charset.forName(charset);
+        CONTENT = init();
+    }
 
     /**
-     *  "Note that this method is intended for simple cases where CONTENTit is convenient 
+     *  "Note that this method is intended for simple cases where it is convenient 
      *  to read all lines in a single operation. It is not intended for reading in large files."
      *  See <a href="https://docs.oracle.com/javase/7/docs/api/java/nio/file/Files.html#readAllLines(java.nio.file.Path,%20java.nio.charset.Charset)">readAllLines</a>
      *  
@@ -39,10 +45,14 @@ public class InputLab {
     public static List<String> byRegex(String reg) {
         List<String> res = new ArrayList<>();
         Pattern pat = Pattern.compile(reg);
+        boolean switcher = true;
         for (String line : CONTENT) {
             Matcher match = pat.matcher(line);
-            while (match.find()) {
-                res.add(line);
+            while (switcher) {
+                    if (match.find()) { 
+                        res.add(line);
+                }
+                    switcher = false;
             }
         }
         return res;
