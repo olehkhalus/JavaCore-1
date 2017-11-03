@@ -4,7 +4,11 @@ import static com.hw.hw8.io.InputLab.*;
 import java.io.*;
 
 public class OutputLab {
-    public static final File FILE_PATH = new File("output.txt");
+    private static File FILE_PATH = new File("");;
+
+    public OutputLab(String filePath) {
+        FILE_PATH =  new File("filePath");
+    }
 
     public static void write() {
         try {
@@ -12,8 +16,5 @@ public class OutputLab {
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
-    }
-    public static void main(String[] args) {
-        new OutputLab().write();
     }
 }
