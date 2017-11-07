@@ -1,16 +1,17 @@
 package Books;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Book {
     private String name;
-    private ArrayList<Author> authors;
+    private List<Author> authors;
 
     public String getName() {
         return name;
     }
 
-    public ArrayList<Author> getAuthors() {
+    public List<Author> getAuthors() {
         return authors;
     }
 

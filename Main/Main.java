@@ -1,5 +1,4 @@
 package Main;
-
 import Books.*;
 
 import java.util.ArrayList;
@@ -40,15 +39,24 @@ public class Main {
         books.add(master);
         books.add(dogHeart);
 
-        Library library1 = new Library(books, 9, 19, "Chernivtsi, Golovna str., 200");
-        Library library2 = new Library(books,8, 23,"Chernivtsi, Golovna str., 100");
-        Library library3 = new Library(books1,8, 20,"Chernivtsi, Golovna str., 10");
+        Library library1 = new Library(books, 9, 00, 22, 00, "Chernivtsi, Golovna str., 200");
+        Library library2 = new Library(books,8,00, 23, 00,"Chernivtsi, Golovna str., 100");
+        Library library3 = new Library(books1,8,00, 20,00,"Chernivtsi, Golovna str., 10");
 
         libraries.add(library1);
         libraries.add(library2);
         libraries.add(library3);
+        ArrayList<Library> librariesVsSearchingBook = new ArrayList<>();
+        LibraryService libraryService =new LibraryService(libraries,librariesVsSearchingBook);
 
-        //library1.findBookByName("Kavkaz", libraries);
-        library1.findBookByAuthor("Myhail", "Bulgakov", libraries);
+
+        libraryService.listOfLibrariesVsSearchingBook("Kavkaz");
+        libraryService.getAddressOfNecessaryLibrary();
+
+        libraryService.fillTheMapOfLybrariesByAuthor("Myhail", "Bulgakov");
+        libraryService.printAllAddressLibrariesBySearchingAuthor();
+
+
+
     }
 }
