@@ -4,17 +4,15 @@ import java.util.*;
 public class Library {
     private String address;
     private LocalTime openingTime;
-    private List<Book> books;
+    private Map<Book, Boolean> books;
 
     public Library(String address, int openingHour, int openingMinute){
         this.address = address;
         this.openingTime = LocalTime.of(openingHour, openingMinute);
-        this.books=new ArrayList<>();
+        this.books=new HashMap<>();
     }
 
-    public void addBook(Book book){
-        this.books.add(book);
-    }
+    public Map<Book, Boolean> getBooks(){ return books; }
 
     public String getAddress() {
         return address;
@@ -32,33 +30,7 @@ public class Library {
         this.openingTime = LocalTime.of(openingHour, openingMinute);
     }
 
-    public boolean isBookAvailable(String name, String author){
-        boolean isAvailable = false;
-        Iterator<Book> iterator = books.iterator();
-        Book tmp;
-        while(iterator.hasNext()){
-            tmp=iterator.next();
-            if(tmp.getName().equalsIgnoreCase(name) && tmp.getAuthor().equalsIgnoreCase(author)) {isAvailable = true;}
-        }
-        return isAvailable;
-    }
 
-    public static Library findLibraryWithBook(String name, String author, List<Library> libraries){
-        List<Library> availableLibraries = new ArrayList<>();
-        for(Library library : libraries){
-            if(library.isBookAvailable(name, author)){
-                availableLibraries.add(library);
-            }
-        }
-        if(availableLibraries.isEmpty()) {
-            return null;
-        }
-        else{
-            Collections.sort(availableLibraries, Comparator.comparingInt(o -> o.getOpeningTime().toSecondOfDay()));
-            System.out.print("You can find this book there: ");
-            return availableLibraries.get(0);
-        }
-    }
 
     @Override
     public String toString() {
