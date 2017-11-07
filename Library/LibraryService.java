@@ -10,15 +10,15 @@ public class LibraryService {
     }
 
     public void borrowBook(Book book){
-        if(isBookInStock(book) == true) library.getBooks().put(book, false);
+        if(isBookInStock(book)) library.getBooks().put(book, false);
     }
 
     public void returnBook(Book book){
-        if(library.getBooks().containsKey(book) && isBookInStock(book) == false) library.getBooks().put(book, true);
+        if(library.getBooks().containsKey(book) && !isBookInStock(book)) library.getBooks().put(book, true);
     }
 
     public boolean isBookInStock(Book book){
-        return isBookInLibrary(book) && library.getBooks().get(book) == true;
+        return isBookInLibrary(book) && library.getBooks().get(book);
     }
 
     public boolean isBookInLibrary(Book book){
