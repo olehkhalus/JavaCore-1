@@ -6,33 +6,22 @@ public class LibraryService {
     }
 
     public boolean addBook(Book book){
-        if(this.library.getBooks().put(book, true)) { return true;}
-        else {return false;}
+        return library.getBooks().put(book, true);
     }
 
     public void borrowBook(Book book){
-        if(this.library.getBooks().containsKey(book) && isBookInStock(book)) this.library.getBooks().put(book, isBookInStock(book));
+        if(isBookInStock(book) == true) library.getBooks().put(book, false);
     }
 
     public void returnBook(Book book){
-        if(this.library.getBooks().containsKey(book) && !isBookInStock(book)) this.library.getBooks().put(book, isBookInStock(book));
+        if(library.getBooks().containsKey(book) && isBookInStock(book) == false) library.getBooks().put(book, true);
     }
 
     public boolean isBookInStock(Book book){
-        if(this.library.getBooks().containsKey(book) && this.library.getBooks().get(book) == true) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return library.getBooks().containsKey(book) && library.getBooks().get(book) == true;
     }
 
     public boolean isBookInLibrary(Book book){
-        if(this.library.getBooks().containsKey(book)) {
-            return true;
-        }
-        else{
-            return false;
-        }
+        return library.getBooks().containsKey(book);
     }
 }
