@@ -1,59 +1,60 @@
-package library;
+import java.util.List;
+import java.util.ArrayList;
+import java.time.Year;
 
 public class Book {
 
-    private String author;
-    private String title;   
-    private int published;
-    private boolean borrowed;
-
+    private List<Author> authorList;
+    private String title;
+    private Year published;
+    private Boolean available;
+    
     public Book() {
+        this(new ArrayList<>(), "UNKNOWN", Year.of(2017));
     }
 
-    public Book(String author, String title, int published) {
-        this.author = author;
+    public Book(List<Author> authorList, String title, Year published) {
+        this.authorList = authorList;
         this.title = title;
         this.published = published;
+        available = true;
     }
 
-    public String getAuthor() {
-        return author;
+    public List<Author> getAuthorList() {
+       return authorList;
     }
-
-    public void setAuthor(String author) {
-        this.author = author;
+    
+    public void setAuthorList(List<Author> authorList) {
+        this.authorList = authorList;
     }
-
+        
     public String getTitle() {
         return title;
-    }
+    }        
 
     public void setTitle(String title) {
         this.title = title;
     }
 
-    public int getPublished() {
+    public Year getPublished() {
         return published;
     }
 
-    public void setPublished(int published) {
+    public void setPublished(Year published) {
         this.published = published;
     }
 
-    public void borrowed() {
-        borrowed = true;
+    public Boolean getAvailable() {
+        return available;
     }
 
-    public void returned() {
-        borrowed = false;
-    }
-
-    public boolean isBorrowed() {
-        return borrowed;
+    public void setAvailable(Boolean available) {
+        this.available = available;
     }
 
     @Override
     public String toString() {
-        return String.format("%s %s %d", author, title, published);
+        return String.format("%s %s %s%n", authorList, title, String.valueOf(published));
     }
+
 }
