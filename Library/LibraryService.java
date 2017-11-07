@@ -18,7 +18,7 @@ public class LibraryService {
     }
 
     public boolean isBookInStock(Book book){
-        return library.getBooks().containsKey(book) && library.getBooks().get(book) == true;
+        return isBookInLibrary(book) && library.getBooks().get(book) == true;
     }
 
     public boolean isBookInLibrary(Book book){
