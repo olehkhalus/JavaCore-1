@@ -26,13 +26,9 @@ public class Author {
     public String toString() {
         return name + " " + surname;
     }
-
-    public boolean equals(Author author){
-        if(author.getName().equals(this.getName()) && author.getSurname().equals(this.getSurname())){
-            return true;
-        }
-        else {
-            return false;
-        }
+    
+    @Override
+    public boolean equals(Object author){
+        return author.getName().equals(this.getName()) && author.getSurname().equals(this.getSurname());
     }
 }
