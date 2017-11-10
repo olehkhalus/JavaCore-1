@@ -1,102 +1,140 @@
 package Books;
 
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class LibraryService {
     private List<Library> libraries;
-    private List<Library> librariesVsSearchingBook;
     private String currentLibraryAddress = null;
-    HashMap<String,ArrayList<String>> mapBooksByAuthor = new HashMap<>();
-    ArrayList<String>keysForMap = new ArrayList<>();
+    Map<String,ArrayList<String>> mapBooksByAuthor = new HashMap<>();
+    List<String>keysForMap = new ArrayList<>();
 
-    public LibraryService(List<Library> libraries, List<Library> librariesVsSearchingBook) {
+    public LibraryService(List<Library> libraries) {
         this.libraries = libraries;
-        this.librariesVsSearchingBook = librariesVsSearchingBook;
     }
 
     public void setLibraries(List<Library> libraries) {
         this.libraries = libraries;
     }
 
-    public List listOfLibrariesVsSearchingBook(String nameOfSearchingBook) {
-
+    public List<Library> listOfLibrariesWithSearchingBook(Book searchingBook) {
+        List<Library> librariesWithSearchingBook = new ArrayList<>();
         for (Library currentLibraries : libraries) {
             for (Book currentBook : currentLibraries.getBooks()) {
-                if (currentBook.getName().toLowerCase().equals(nameOfSearchingBook.toLowerCase())) {
-                    librariesVsSearchingBook.add(currentLibraries);
+                if (currentBook.equals(searchingBook)) {
+                    librariesWithSearchingBook.add(currentLibraries);
                 }
             }
         }
-        if (librariesVsSearchingBook.isEmpty()) {
-            System.out.println("We are can't find this book. Sorry!");
-            return null;
-        } else {
-            return librariesVsSearchingBook;
+            if (librariesWithSearchingBook.isEmpty()) {
+                System.out.println("We are can't find this book. Sorry!");
+            }
+            return librariesWithSearchingBook;
         }
+
+
+    public List<String> getAddressOfNecessaryLibrary(Book searchingBook) {
+        List<Library> librariesWithSearchingBook = listOfLibrariesWithSearchingBook(searchingBook);
+        ArrayList<String> listOfAddress = new ArrayList<>();
+        for (Library currentLibrary : librariesWithSearchingBook) {
+            listOfAddress.add(currentLibrary.getAddress());
+        }
+        return listOfAddress;
     }
 
-    public void getAddressOfNecessaryLibrary() {
+    public List <Integer> getNumberOfNecessaryLibrary(Book searchingBook) {
+        List<Library> librariesWithSearchingBook = listOfLibrariesWithSearchingBook(searchingBook);
+        ArrayList<Integer> listOfNumbers = new ArrayList<>();
+        for (Library currentLibrary : librariesWithSearchingBook) {
+            listOfNumbers.add(currentLibrary.getNumberOfLibrary());
+        }
+        return listOfNumbers;
+    }
+
+    public String getAdressByNumber(Integer numberOfLibrary){
+       String addressOfLibrary = new String();
+        for (Library currentLibrary: libraries){
+            if (currentLibrary.getNumberOfLibrary().equals(numberOfLibrary)){
+                addressOfLibrary = currentLibrary.getAddress();
+            }
+        }
+        return addressOfLibrary;
+    }
+
+    public Boolean isLibraryOpenNow(Integer numberOfLibrary){
         LocalTime currentTime = LocalTime.now();
-        Integer timeMinimum = 12;
-        for (Library currentLibrary : librariesVsSearchingBook) {
-            if (currentTime.getHour() >= currentLibrary.getTimeOfWorkBegin().getHour()
-                    && currentTime.getHour() + 1 < currentLibrary.getTimeOfWorkClose().getHour()) {
-                System.out.printf("This book you can find at the address: %s", currentLibrary.getAddress());
-                return;
-            } else {
-                for (Library timeToOpen : librariesVsSearchingBook) {
-                    if (timeMinimum > timeToOpen.getTimeOfWorkBegin().getHour()) {
-                        timeMinimum = timeToOpen.getTimeOfWorkBegin().getHour();
-                        currentLibraryAddress = timeToOpen.getAddress();
-                    }
+        Boolean isOpen = false;
+        for (Library currentLibrary: libraries){
+            if (currentLibrary.getNumberOfLibrary().equals(numberOfLibrary)){
+                if(currentTime.getHour()>= currentLibrary.getTimeOfWorkBegin().getHour() &&
+                   currentTime.getHour()<currentLibrary.getTimeOfWorkClose().getHour()){
+                    isOpen = true;
                 }
             }
         }
-        if (librariesVsSearchingBook.isEmpty()) {
-            return;
-        } else {
-            System.out.printf("This book you can find at the address: %s. This library will be open at %d o'clck",
-                    currentLibraryAddress, timeMinimum);
+        return isOpen;
+    }
+    public Integer libraryIsOpenEarlier(){
+        Integer timeMinimum = Integer.MAX_VALUE;
+        Integer numberOfLibrary=0;
+        String addressOfLibrary = new String();
+        for (Library currentLibrary: libraries){
+            if (currentLibrary.getTimeOfWorkBegin().getHour() < timeMinimum){
+                timeMinimum = currentLibrary.getTimeOfWorkBegin().getHour();
+                numberOfLibrary = currentLibrary.getNumberOfLibrary();
+            }
         }
+        return numberOfLibrary;
     }
 
-
-    public void fillTheMapOfLybrariesByAuthor(String authorFirstName, String authorLastName) {
-        for (Library currentLibrary : libraries) {
-            ArrayList<String> booksByAuthor = new ArrayList<>();
-            String address = null;
-            for (Book currentBook : currentLibrary.getBooks()) {
-                for (Author currentAuthor : currentBook.getAuthors()) {
-                    if (currentAuthor.getFirstName().toLowerCase().equals(authorFirstName.toLowerCase())
-                            && currentAuthor.getLastName().toLowerCase().equals(authorLastName.toLowerCase())) {
-                        booksByAuthor.add(currentBook.getName());
-                        address = currentLibrary.getAddress();
+        public List<Library> getListOfLybrariesBySearchingAuthor(List<Author> authors) {
+            List<Library> lybrariesBySearchingAuthor = new ArrayList<>();
+            for (Library currentLibrary : libraries) {
+                    if (currentLibrary.isBooksBySearchingAuthorInLibrary(authors)){
+                        lybrariesBySearchingAuthor.add(currentLibrary);
                     }
-                }
             }
-            if (address != null) {
-                mapBooksByAuthor.put(address, booksByAuthor);
-                keysForMap.add(address);
+            if (lybrariesBySearchingAuthor.isEmpty()) {
+                System.out.println("Sorry, but we have not books by searching author");
             }
+            else
+                System.out.println(lybrariesBySearchingAuthor.toString());
+            return lybrariesBySearchingAuthor;
         }
+
+
+    public List<Integer> getNumbersOfLibrariesBySearchingAuthor (List<Author> authors){
+        List<Integer> numbersOfLibrariesBySearchingAuthor = new ArrayList<>();
+        List<Library> lybrariesBySearchingAuthor = new ArrayList<>();
+        lybrariesBySearchingAuthor = getListOfLybrariesBySearchingAuthor(authors);
+        for (Library currentLibrary: lybrariesBySearchingAuthor){
+            numbersOfLibrariesBySearchingAuthor.add(currentLibrary.getNumberOfLibrary());
+        }
+        return numbersOfLibrariesBySearchingAuthor;
     }
 
-    public void printAllAddressLibrariesBySearchingAuthor (){
-        for (String keys: keysForMap) {
-            System.out.println();
-            System.out.printf("You can find these books: %s, by the your searching author: at the address: %s",
-                    mapBooksByAuthor.get(keys), keys);
-            for (Library currentLibrary: libraries){
-                if (currentLibrary.getAddress().equals(keys)){
-                    System.out.println();
-                    System.out.printf("This library working from %d to %d o'clock",
-                            currentLibrary.getTimeOfWorkBegin().getHour(), currentLibrary.getTimeOfWorkClose().getHour());
-                }
-            }
-        }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        LibraryService that = (LibraryService) o;
+
+        if (libraries != null ? !libraries.equals(that.libraries) : that.libraries != null) return false;
+        if (currentLibraryAddress != null ? !currentLibraryAddress.equals(that.currentLibraryAddress) : that.currentLibraryAddress != null)
+            return false;
+        if (mapBooksByAuthor != null ? !mapBooksByAuthor.equals(that.mapBooksByAuthor) : that.mapBooksByAuthor != null)
+            return false;
+        return keysForMap != null ? keysForMap.equals(that.keysForMap) : that.keysForMap == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = libraries != null ? libraries.hashCode() : 0;
+        result = 31 * result + (currentLibraryAddress != null ? currentLibraryAddress.hashCode() : 0);
+        result = 31 * result + (mapBooksByAuthor != null ? mapBooksByAuthor.hashCode() : 0);
+        result = 31 * result + (keysForMap != null ? keysForMap.hashCode() : 0);
+        return result;
     }
 }
 
