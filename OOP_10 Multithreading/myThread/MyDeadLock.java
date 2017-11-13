@@ -1,7 +1,9 @@
+package myThread;
+
 public class MyDeadLock {
     String string1 ="Hello world";
     String string2 = "Bay bay";
-    Thread thread1 = new Thread("My Thread1"){
+    public Thread thread1 = new Thread("My Thread1"){
       public void run(){
         while (true){
             synchronized (string1){
@@ -12,7 +14,7 @@ public class MyDeadLock {
         }
       }
     };
-    Thread thread2 = new Thread("My Thread2"){
+   public Thread thread2 = new Thread("My Thread2"){
         public void run(){
             while (true){
                 synchronized (string2){
