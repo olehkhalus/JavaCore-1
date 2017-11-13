@@ -4,18 +4,26 @@ package HomeWork_Presentation10;
 // which has to output its number («Thread number two») 3 times and create thread «three»,
 // which would to output message «Thread number three» 5 times.
 
-class T extends Thread {
-    String number ;
+class MyThread extends Thread {
+    String name ;
     int iterations;
 
-    T( String number , int iterations) {
-        this.number = number;
+    MyThread( String name , int iterations) {
+        this.name = name;
         this.iterations = iterations;
     }
 
     public void run(){
+      	
         for ( int i = 0 ; i < iterations ; i++) {
-            System.out.println("Thread number" + number);
+            System.out.println("Thread number " +name+" "+this.getName());
+        }
+        if ( iterations == 0 ) {
+            new MyThread(" two" , 3).start();
+        } else if ( iterations == 3 ) {
+            new MyThread(" three" , 5 ).start();
+        } else if ( iterations > 3 ) {
+            System.out.println("Finaly!!!!");
         }
     }
 
@@ -25,28 +33,9 @@ class T extends Thread {
 
 public class Presentation10_Task3 {
     public static void main( String[] Args) {
-        T thread1 = new T ("one" , 0);
-        T thread2 = new T ("two" , 3);
-        T thread3 = new T ("three" , 5);
-
-        thread1.run();
-        try {
-            thread1.join();
-        } catch (InterruptedException e) {
-
-        }
-
-        thread2.run();
-        try {
-            thread2.join();
-        } catch (InterruptedException e) {
-
-        }
-
-        thread3.run();
-
-
-
-
+        MyThread thread1 = new MyThread ("one" , 0);
+        
+        thread1.start();
+        
     }
 }
