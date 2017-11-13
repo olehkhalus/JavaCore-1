@@ -6,8 +6,8 @@ import java.util.*;
 public class LibraryService {
     private List<Library> libraries;
     private String currentLibraryAddress = null;
-    Map<String,ArrayList<String>> mapBooksByAuthor = new HashMap<>();
-    List<String>keysForMap = new ArrayList<>();
+    Map<String, ArrayList<String>> mapBooksByAuthor = new HashMap<>();
+    List<String> keysForMap = new ArrayList<>();
 
     public LibraryService(List<Library> libraries) {
         this.libraries = libraries;
@@ -26,14 +26,14 @@ public class LibraryService {
                 }
             }
         }
-            if (librariesWithSearchingBook.isEmpty()) {
-                System.out.println("We are can't find this book. Sorry!");
-            }
-            return librariesWithSearchingBook;
+        if (librariesWithSearchingBook.isEmpty()) {
+            System.out.println("We can't find this book. Sorry!");
         }
+        return librariesWithSearchingBook;
+    }
 
 
-    public List<String> getAddressOfNecessaryLibrary(Book searchingBook) {
+    public List<String> getAddressOfLibraries(Book searchingBook) {
         List<Library> librariesWithSearchingBook = listOfLibrariesWithSearchingBook(searchingBook);
         ArrayList<String> listOfAddress = new ArrayList<>();
         for (Library currentLibrary : librariesWithSearchingBook) {
@@ -42,75 +42,53 @@ public class LibraryService {
         return listOfAddress;
     }
 
-    public List <Integer> getNumberOfNecessaryLibrary(Book searchingBook) {
-        List<Library> librariesWithSearchingBook = listOfLibrariesWithSearchingBook(searchingBook);
-        ArrayList<Integer> listOfNumbers = new ArrayList<>();
-        for (Library currentLibrary : librariesWithSearchingBook) {
-            listOfNumbers.add(currentLibrary.getNumberOfLibrary());
-        }
-        return listOfNumbers;
+    public String getAdressLibrary(Library oneLibrary) {
+        return oneLibrary.getAddress();
     }
 
-    public String getAdressByNumber(Integer numberOfLibrary){
-       String addressOfLibrary = new String();
-        for (Library currentLibrary: libraries){
-            if (currentLibrary.getNumberOfLibrary().equals(numberOfLibrary)){
-                addressOfLibrary = currentLibrary.getAddress();
+    public Boolean isLibraryOpenNow(Library library) {
+        if (libraries.contains(library)) {
+            LocalTime currentTime = LocalTime.now();
+            Boolean isOpen = false;
+            if (currentTime.getHour() >= library.getTimeOfWorkBegin().getHour() &&
+                    currentTime.getHour() < library.getTimeOfWorkClose().getHour()) {
+                isOpen = true;
             }
+            return isOpen;
+        } else {
+            System.out.println("We have not information about this library");
+            return false;
         }
-        return addressOfLibrary;
     }
 
-    public Boolean isLibraryOpenNow(Integer numberOfLibrary){
-        LocalTime currentTime = LocalTime.now();
-        Boolean isOpen = false;
-        for (Library currentLibrary: libraries){
-            if (currentLibrary.getNumberOfLibrary().equals(numberOfLibrary)){
-                if(currentTime.getHour()>= currentLibrary.getTimeOfWorkBegin().getHour() &&
-                   currentTime.getHour()<currentLibrary.getTimeOfWorkClose().getHour()){
-                    isOpen = true;
-                }
-            }
-        }
-        return isOpen;
-    }
-    public Integer libraryIsOpenEarlier(){
+    public Library libraryIsOpenEarlier() {
         Integer timeMinimum = Integer.MAX_VALUE;
-        Integer numberOfLibrary=0;
-        String addressOfLibrary = new String();
-        for (Library currentLibrary: libraries){
-            if (currentLibrary.getTimeOfWorkBegin().getHour() < timeMinimum){
+        Library libraryErlier = new Library();
+        for (Library currentLibrary : libraries) {
+            if (currentLibrary.getTimeOfWorkBegin().getHour() < timeMinimum) {
                 timeMinimum = currentLibrary.getTimeOfWorkBegin().getHour();
-                numberOfLibrary = currentLibrary.getNumberOfLibrary();
+                libraryErlier = currentLibrary;
             }
         }
-        return numberOfLibrary;
+        return libraryErlier;
     }
 
-        public List<Library> getListOfLybrariesBySearchingAuthor(List<Author> authors) {
-            List<Library> lybrariesBySearchingAuthor = new ArrayList<>();
-            for (Library currentLibrary : libraries) {
-                    if (currentLibrary.isBooksBySearchingAuthorInLibrary(authors)){
-                        lybrariesBySearchingAuthor.add(currentLibrary);
-                    }
-            }
-            if (lybrariesBySearchingAuthor.isEmpty()) {
-                System.out.println("Sorry, but we have not books by searching author");
-            }
-            else
-                System.out.println(lybrariesBySearchingAuthor.toString());
-            return lybrariesBySearchingAuthor;
-        }
-
-
-    public List<Integer> getNumbersOfLibrariesBySearchingAuthor (List<Author> authors){
-        List<Integer> numbersOfLibrariesBySearchingAuthor = new ArrayList<>();
+    public List<Library> getListOfLybrariesByAuthor(Author... authors) {
         List<Library> lybrariesBySearchingAuthor = new ArrayList<>();
-        lybrariesBySearchingAuthor = getListOfLybrariesBySearchingAuthor(authors);
-        for (Library currentLibrary: lybrariesBySearchingAuthor){
-            numbersOfLibrariesBySearchingAuthor.add(currentLibrary.getNumberOfLibrary());
+        for (Library currentLibrary : libraries) {
+            if (currentLibrary.isBooksBySearchingAuthorInLibrary(authors)) {
+                lybrariesBySearchingAuthor.add(currentLibrary);
+            }
         }
-        return numbersOfLibrariesBySearchingAuthor;
+        if (lybrariesBySearchingAuthor.isEmpty()) {
+            System.out.println("Sorry, but we have not books by searching author");
+        } else
+            System.out.println(lybrariesBySearchingAuthor.toString());
+        return lybrariesBySearchingAuthor;
+    }
+
+    public Boolean isThisBookAvailable(Book book, Library library) {
+        return (library.getBookAvailability().getMap().get(book) >= 1);
     }
 
     @Override
@@ -137,8 +115,3 @@ public class LibraryService {
         return result;
     }
 }
-
-
-
-
-

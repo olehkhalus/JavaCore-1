@@ -2,6 +2,8 @@ package Main;
 import Books.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main {
     public static void main(String...args) {
@@ -39,12 +41,25 @@ public class Main {
         books.add(master);
         books.add(dogHeart);
 
+        Map<Book, Integer> libraryMap1 = new HashMap<>();
+        libraryMap1.put(kobzar,3);
+        libraryMap1.put(zapovit,1);
+        libraryMap1.put(son,2);
+        libraryMap1.put(kavkaz,2);
+        libraryMap1.put(javaPhilosophy,2);
+        libraryMap1.put(master,2);
+        libraryMap1.put(dogHeart,1);
+        BookAvailability bookAvailability1= new BookAvailability();
+        bookAvailability1.setMap(libraryMap1);
+
         Library library1 = new Library(books, 9, 00, 22, 00,
-                "Chernivtsi, Golovna str., 200", 1);
+                "Chernivtsi, Golovna str., 200");
         Library library2 = new Library(books, 8, 00, 23, 00,
-                "Chernivtsi, Golovna str., 100", 2);
+                "Chernivtsi, Golovna str., 100");
         Library library3 = new Library(books1, 8, 00, 20, 00,
-                "Chernivtsi, Golovna str., 10", 3);
+                "Chernivtsi, Golovna str., 10");
+
+        library1.setBookAvailability(bookAvailability1);
 
         libraries.add(library1);
         libraries.add(library2);
@@ -52,21 +67,21 @@ public class Main {
         ArrayList<Library> librariesVsSearchingBook = new ArrayList<>();
         LibraryService libraryService = new LibraryService(libraries);
 
-     /*   Book searchingBook = new Book();
+        Book searchingBook = new Book();
         searchingBook = searchingBook.setBookForCompare("Son", "Taras", "Shevchenko", Country.UKRAINE);
 
-        for (String carrentAddress: libraryService.getAddressOfNecessaryLibrary(searchingBook)){
+        for (String carrentAddress: libraryService.getAddressOfLibraries(searchingBook)){
             System.out.println(carrentAddress);
-        }  */
+        }
 
         Author searchingAuthor = new Author("Taras", "Shevchenko", Country.UKRAINE);
         ArrayList<Author> searchingAuthors = new ArrayList<>();
         searchingAuthors.add(searchingAuthor);
-        for (Integer i : libraryService.getNumbersOfLibrariesBySearchingAuthor(searchingAuthors)) {
-            System.out.println(i);
+        for (Library library : libraryService.getListOfLybrariesByAuthor(searchingAuthor)) {
+            System.out.println(library);
         }
 
-
+        System.out.println(libraryService.isThisBookAvailable(searchingBook,library1));
     }
     }
 
