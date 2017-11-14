@@ -1,54 +1,59 @@
 package Library;
 
 import java.time.LocalTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class LibrariesService {
-	
-	private List<Library> ListOfLibraries = new ArrayList<>();
-	private List<Library> BookAvaliableAt = new ArrayList<>();
-	
-	public LibrariesService() {
-		
-	}
-	
-	public void addLibrary( Library Library ) {
-		ListOfLibraries.add(Library);
-	}
-	
-	
-	public void findBook(Book Book) {
-		for ( int i = 0 ; i <ListOfLibraries.size(); i++ ) {			
-			if (LocalTime.now().getHour() >= ListOfLibraries.get(i).getIsOpenAt().getHour() && LocalTime.now().getHour() < ListOfLibraries.get(i).getIsClosedAt().getHour() ) {
-				if (LocalTime.now().getMinute() > ListOfLibraries.get(i).getIsOpenAt().getMinute()) {
-					if (ListOfLibraries.get(i).getLibraryBooks().containsKey(Book)) {
-						if (ListOfLibraries.get(i).getLibraryBooks().get(Book) > 0) {
-							BookAvaliableAt.add(ListOfLibraries.get(i));
-						}
-					}
-				}
-			}
-		}
-		
-		Collections.sort(BookAvaliableAt, new Comparator<Library>() {
-			  public int compare(Library o1, Library o2) {
-			    return o1.getIsClosedAt().compareTo(o2.getIsClosedAt());
-			  }
-			});
-		
-		for ( int i = 0 ; i < BookAvaliableAt.size() ; i++ ) {
-			System.out.println("Library at the adress "+BookAvaliableAt.get(i).getLibraryAdress()+" will close at: "+BookAvaliableAt.get(i).getIsClosedAt());
-		}
-		
-		
-		
-		
-	}
+    private List<Library> listOfLibraries = new ArrayList<>();
+    //private List<Library> listOfLibrariesWithSearchedBook = new ArrayList<>();
+
+    public LibrariesService() {
+
+    }
+
+    public void addLibrary( Library Library ) {
+        listOfLibraries.add(Library);
+    }
+
+
+    public List<Library> findBook(Book book) {
+        List<Library> res = new ArrayList<Library>();
+
+        for (Library library : listOfLibraries) {
+            if (LocalTime.now().getHour() >= library.getIsOpenAt().getHour() && LocalTime.now().getMinute() >= library.getIsOpenAt().getMinute() && LocalTime.now().getHour() < library.getIsClosedAt().getHour() ) {
+                if (library.getBooks().containsKey(book) && library.isBookAvailable(book) ) {
+                    // if (listOfLibraries.get(i).getBooks().get(Book) > 0) {
+                    res.add(library);
+                    //}
+                }
+            }
+        }
+
+        for (int i = 0; i < listOfLibraries.size(); i++ ) {
+            if (LocalTime.now().getHour() >= listOfLibraries.get(i).getIsOpenAt().getHour() && LocalTime.now().getMinute() >= listOfLibraries.get(i).getIsOpenAt().getMinute() && LocalTime.now().getHour() < listOfLibraries.get(i).getIsClosedAt().getHour() ) {
+                if (listOfLibraries.get(i).getBooks().containsKey(book) && listOfLibraries.get(i).isBookAvailable(book) ) {
+                   // if (listOfLibraries.get(i).getBooks().get(Book) > 0) {
+                        res.add(listOfLibraries.get(i));
+                    //}
+                }
+            }
+
+        }
+
+        Collections.sort(res, new Comparator<Library>() {
+            public int compare(Library o1, Library o2) {
+                return o1.getIsClosedAt().compareTo(o2.getIsClosedAt());
+            }
+        });
+
+        /*for (int i = 0; i < listOfLibrariesWithSearchedBook.size() ; i++ ) {
+            System.out.println("Library at the adress "+ listOfLibrariesWithSearchedBook.get(i).getLibraryAdress()+" will close at: "+ listOfLibrariesWithSearchedBook.get(i).getIsClosedAt());
+        }*/
+        Collections.reverse(res);
+        return res;
+    }
 
 }
