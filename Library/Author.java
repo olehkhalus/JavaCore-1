@@ -1,72 +1,36 @@
 package Library;
 
-import java.time.LocalTime;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Library {
-    private String adress;
-    private LocalTime openingTime;
-    private LocalTime endOfWorkTime;
-    private Map<Book, Integer > books = new HashMap<>(); // integer is the count of avaluable exemplar of this book in library
-
-    public Library() {
+public class Author {
+    private String firstName;
+    private String lastName;
+    private List<Book> books;
+    public Author() {
 
     }
-    public Library ( String adress , int openedHour , int openedMinute  , int closedHour , int closedMinute  ) {
-        this.adress = adress;
-        this.openingTime = LocalTime.of(openedHour, openedMinute);
-        this.endOfWorkTime = LocalTime.of(closedHour, closedMinute);
+
+    public Author(String firstName , String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getName() {
+        return firstName+" "+lastName;
     }
-    public void setAdress( String adress) {
-        this.adress = adress;
-    }
-
-    public LocalTime getOpeningTime() {
-        return openingTime;
-    }
-    public void setLibraryOpeningTime( LocalTime openingTime) {
-        this.openingTime = openingTime;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public LocalTime getEndOfWorkTime() {
-        return endOfWorkTime;
-    }
-    public void setEndOfWorkTime( LocalTime endOfWorkTime) {
-        this.endOfWorkTime = endOfWorkTime;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public Map<Book, Integer> getBooks() {
+    public List<Book> getBooks() {
         return books;
     }
-
-    public void addBook( Book book , Integer NumberOfBooks ) {
-        books.put(book, NumberOfBooks);
-    }
-
-    public boolean isBookInLibrary(Book book) {
-        if (books.containsKey(book)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public boolean isBookAvailable(Book book) {
-        if ( books.get(book) > 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    @Override
-    public String toString() {
-        return "Library adress "+adress+". This library opens in: "+getOpeningTime()+" and closed at:  "+getEndOfWorkTime();
+    public void addBook(Book book) {
+        books.add(book);
     }
 }
-
