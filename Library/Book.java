@@ -1,42 +1,43 @@
 package Library;
 
 public class Book {
-	private String BookName;
-	private String BookAuthor;
-	private int YearOfPublication;
+	private String name;
+	private Author author;
+	private int yearOfPublication;
 	
 	public Book() {
 		
 	}
 	
-	public Book(String BookName , String BookAuthor , int YearOfPublication) {
-		this.BookName = BookName;
-		this.BookAuthor = BookAuthor;
-		this.YearOfPublication = YearOfPublication;
+	public Book(String name , Author author , int yearOfPublication) {
+		this.name = name;
+		this.author = author;
+		this.yearOfPublication = yearOfPublication;
 	}
 	
 	public String getBookName() {
-		return BookName;
+		return name;
 	}
-	public void setBookName(String BookName) {
-		this.BookName = BookName;
+	public void setBookName(String name) {
+		this.name = name;
 	}
 	
-	public String getBookAuthor() {
-		return BookAuthor;
+	public Author getBookAuthor() {
+		return author;
 	}
-	public void setBookAuthor(String BookAuthor) {
-		this.BookAuthor = BookAuthor;
+	public void setBookAuthor(Author author) {
+		this.author = author;
 	}
 	
 	public int getYearOfPublication() {
-		return YearOfPublication;
+		return yearOfPublication;
 	}
-	public void setYearOfPublication(int YearOfPublication) {
-		this.YearOfPublication = YearOfPublication;
+	public void setYearOfPublication(int yearOfPublication) {
+		this.yearOfPublication = yearOfPublication;
 	}
 	
-	public void outputBook() {
-		System.out.println("Book name "+BookName+" Author "+BookAuthor+" year "+YearOfPublication);
-	}
+	@Override
+    public String toString() {
+        return "Book name "+name+" Author "+author.getName()+" year "+yearOfPublication;
+    }
 }

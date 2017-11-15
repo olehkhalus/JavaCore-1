@@ -4,27 +4,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Author {
-	private String AuthorName;
-	private List<Book> AuthorBooks;
+	private String firstName;
+	private String lastName;
+	private List<Book> books;
 	public Author() {
 		
 	}
 	
-	public Author(String AuthorName , ArrayList<Book> AuthorBooks) {
-		this.AuthorName = AuthorName;
+	public Author(String firstName , String lastName) {
+		this.firstName = firstName;
+		this.lastName = lastName;
 	}
 	
-	public String getAuthorName() {
-		return AuthorName;
+	public String getName() {
+		return firstName+lastName;
 	}
-	public void setAuthorName(String AuthorName) {
-		this.AuthorName = AuthorName;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 	
-	public List<Book> getAuthorBooks() {
-		return AuthorBooks;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
-	public void setAuthorBooks(String AuthorName) {
-		this.AuthorBooks = AuthorBooks;
+	
+	public List<Book> getBooks() {
+		return books;
+	}
+	public void addBook(Book book) {
+		books.add(book);
 	}
 }

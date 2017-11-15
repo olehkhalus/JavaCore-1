@@ -11,44 +11,58 @@ import java.util.Map;
 
 public class LibrariesService {
 	
-	private List<Library> ListOfLibraries = new ArrayList<>();
-	private List<Library> BookAvaliableAt = new ArrayList<>();
+	private List<Library> listOfLibraries = new ArrayList<>();
 	
 	public LibrariesService() {
 		
 	}
 	
 	public void addLibrary( Library Library ) {
-		ListOfLibraries.add(Library);
+		listOfLibraries.add(Library);
 	}
 	
-	
-	public void findBook(Book Book) {
-		for ( int i = 0 ; i <ListOfLibraries.size(); i++ ) {			
-			if (LocalTime.now().getHour() >= ListOfLibraries.get(i).getIsOpenAt().getHour() && LocalTime.now().getHour() < ListOfLibraries.get(i).getIsClosedAt().getHour() ) {
-				if (LocalTime.now().getMinute() > ListOfLibraries.get(i).getIsOpenAt().getMinute()) {
-					if (ListOfLibraries.get(i).getLibraryBooks().containsKey(Book)) {
-						if (ListOfLibraries.get(i).getLibraryBooks().get(Book) > 0) {
-							BookAvaliableAt.add(ListOfLibraries.get(i));
-						}
-					}
-				}
-			}
+	public void findBook(Book book) {
+		List<Library> res = new ArrayList<Library>();
+		
+		for ( Library library : listOfLibraries) {
+			if (library.isBookInLibrary(book) && library.isBookAvailable(book) ) {
+                res.add(library);
+            }
 		}
 		
-		Collections.sort(BookAvaliableAt, new Comparator<Library>() {
+		Collections.sort(res, new Comparator<Library>() {
 			  public int compare(Library o1, Library o2) {
-			    return o1.getIsClosedAt().compareTo(o2.getIsClosedAt());
+			    return o1.getOpeningTime().compareTo(o2.getOpeningTime());
 			  }
 			});
 		
-		for ( int i = 0 ; i < BookAvaliableAt.size() ; i++ ) {
-			System.out.println("Library at the adress "+BookAvaliableAt.get(i).getLibraryAdress()+" will close at: "+BookAvaliableAt.get(i).getIsClosedAt());
+		Collections.reverse(res);
+		
+		for ( Library library : res ) {
+			System.out.println("Library at the adress "+library.getAdress()+". This library opens in :"+" and will close at: "+library.getEndOfWorkTime());
 		}
-		
-		
-		
-		
 	}
-
+	
+	public void findBookRightNow(Book book) {
+		
+		List<Library> res = new ArrayList<Library>();
+		
+		for (Library library : listOfLibraries) {
+            if (LocalTime.now().getHour() >= library.getOpeningTime().getHour() && LocalTime.now().getMinute() >= library.getOpeningTime().getMinute() && LocalTime.now().getHour() < library.getEndOfWorkTime().getHour() ) {
+                if (library.isBookInLibrary(book) && library.isBookAvailable(book) ) {
+                    res.add(library);
+                }
+            }
+        }
+		
+		Collections.sort(res, new Comparator<Library>() {
+			  public int compare(Library o1, Library o2) {
+			    return o1.getEndOfWorkTime().compareTo(o2.getEndOfWorkTime());
+			  }
+			});
+		
+		for ( Library library : res ) {
+			System.out.println("Library at the adress "+library.getAdress()+" will close at: "+library.getEndOfWorkTime());
+		}	
+	}
 }

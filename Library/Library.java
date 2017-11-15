@@ -7,53 +7,63 @@ import java.util.List;
 import java.util.Map;
 
 public class Library {
-	private String LibraryAdress;
-	private LocalTime LibraryIsOpenAt;
-	private LocalTime LibraryIsClosedAt;
-	private Map<Book, Integer > LibraryBooks = new HashMap<>();
+	private String adress;
+	private LocalTime openingTime;
+	private LocalTime endOfWorkTime;
+	private Map<Book, Integer > books = new HashMap<>(); // integer is the count of avaluable exemplar of this book in library
 	
 	public Library() {
 		
 	}
-	public Library ( String LibraryAdress , int openedHour , int openedMinute  , int closedHour , int closedMinute  ) {
-		this.LibraryAdress = LibraryAdress;
-		this.LibraryIsOpenAt = LocalTime.of(openedHour, openedMinute);
-        this.LibraryIsClosedAt = LocalTime.of(closedHour, closedMinute);
+	public Library ( String adress , int openedHour , int openedMinute  , int closedHour , int closedMinute  ) {
+		this.adress = adress;
+		this.openingTime = LocalTime.of(openedHour, openedMinute);
+        this.endOfWorkTime = LocalTime.of(closedHour, closedMinute);
+	}
+		
+	public String getAdress() {
+		return adress;
+	}
+	public void setAdress( String adress) {
+		this.adress = adress;
 	}
 	
-	
-	
-	public String getLibraryAdress() {
-		return LibraryAdress;
+	public LocalTime getOpeningTime() {
+		return openingTime;
 	}
-	public void setLibraryAdress( String LibraryAdress) {
-		this.LibraryAdress = LibraryAdress;
+	public void setLibraryOpeningTime( LocalTime openingTime) {
+		this.openingTime = openingTime;
 	}
-	
-	
-	public LocalTime getIsOpenAt() {
-		return LibraryIsOpenAt;
+		
+	public LocalTime getEndOfWorkTime() {
+		return endOfWorkTime;
 	}
-	public void setLibraryIsOpenAt( LocalTime LibraryIsOpenAt) {
-		this.LibraryIsOpenAt = LibraryIsOpenAt;
+	public void setEndOfWorkTime( LocalTime endOfWorkTime) {
+		this.endOfWorkTime = endOfWorkTime;
 	}
-	
-	
-	public LocalTime getIsClosedAt() {
-		return LibraryIsClosedAt;
-	}
-	public void setLibraryIsClosedAt( LocalTime LibraryIsClosedAt) {
-		this.LibraryIsClosedAt = LibraryIsClosedAt;
+		
+	public Map<Book, Integer> getBooks() {
+		return books;
 	}
 	
-	
-	public Map<Book, Integer> getLibraryBooks() {
-		return LibraryBooks;
+	public void addBook( Book book , Integer NumberOfBooks ) {
+		books.put(book, NumberOfBooks);
 	}
-
 	
-	public void addBook( Book Book , Integer NumberOfBooks ) {
-		LibraryBooks.put(Book, NumberOfBooks);
+	public boolean isBookInLibrary(Book book) {
+		if (books.containsKey(book)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+		
+	public boolean isBookAvailable(Book book) {
+		if ( books.get(book) > 0) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	
