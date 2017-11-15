@@ -24,7 +24,7 @@ public class LibrariesService {
 		for ( Library library : listOfLibraries) {
 			if (library.isBookInLibrary(book) && library.isBookAvailable(book) ) {
                 res.add(library);
-            }
+            		}
 		}
 		
 		Collections.sort(res, new Comparator<Library>() {
