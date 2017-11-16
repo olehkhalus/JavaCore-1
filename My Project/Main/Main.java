@@ -6,10 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Main {
-    public static void main(String...args) {
+    public static void main(String... args) {
         ArrayList<Library> libraries = new ArrayList<>();
-        ArrayList<Book> books = new ArrayList<>();
-        ArrayList<Book> books1 = new ArrayList<>();
         Author shevchenko = new Author("Taras", "Shevchenko", Country.UKRAINE);
         ArrayList<Author> arrayShevchenko = new ArrayList<>();
         arrayShevchenko.add(shevchenko);
@@ -33,33 +31,32 @@ public class Main {
         bulgAndEckel.add(eckel);
         Book dogHeart = new Book("Dog heart", bulgAndEckel);
 
-        books.add(kobzar);
-        books.add(zapovit);
-        books.add(son);
-        books.add(kavkaz);
-        books.add(javaPhilosophy);
-        books.add(master);
-        books.add(dogHeart);
-
         Map<Book, Integer> libraryMap1 = new HashMap<>();
-        libraryMap1.put(kobzar,3);
-        libraryMap1.put(zapovit,1);
-        libraryMap1.put(son,2);
-        libraryMap1.put(kavkaz,2);
-        libraryMap1.put(javaPhilosophy,2);
-        libraryMap1.put(master,2);
-        libraryMap1.put(dogHeart,1);
-        BookAvailability bookAvailability1= new BookAvailability();
-        bookAvailability1.setMap(libraryMap1);
+        libraryMap1.put(kobzar, 3);
+        libraryMap1.put(zapovit, 1);
+        libraryMap1.put(son, 10);
+        libraryMap1.put(kavkaz, 2);
+        libraryMap1.put(javaPhilosophy, 2);
+        libraryMap1.put(master, 2);
+        libraryMap1.put(dogHeart, 1);
 
-        Library library1 = new Library(books, 9, 00, 22, 00,
+        Map<Book, Integer> libraryMap2 = new HashMap<>();
+        libraryMap2.put(kobzar, 5);
+        libraryMap2.put(zapovit, 3);
+        libraryMap2.put(kavkaz, 1);
+        libraryMap2.put(javaPhilosophy, 2);
+        libraryMap2.put(dogHeart, 2);
+
+        Map<Book, Integer> libraryMap3 = new HashMap<>();
+        libraryMap3.put(kobzar, 0);
+        libraryMap3.put(javaPhilosophy, 0);
+
+        Library library1 = new Library(libraryMap1, 9, 00, 22, 00,
                 "Chernivtsi, Golovna str., 200");
-        Library library2 = new Library(books, 8, 00, 23, 00,
+        Library library2 = new Library(libraryMap2, 8, 00, 23, 00,
                 "Chernivtsi, Golovna str., 100");
-        Library library3 = new Library(books1, 8, 00, 20, 00,
+        Library library3 = new Library(libraryMap3, 8, 00, 20, 00,
                 "Chernivtsi, Golovna str., 10");
-
-        library1.setBookAvailability(bookAvailability1);
 
         libraries.add(library1);
         libraries.add(library2);
@@ -70,18 +67,31 @@ public class Main {
         Book searchingBook = new Book();
         searchingBook = searchingBook.setBookForCompare("Son", "Taras", "Shevchenko", Country.UKRAINE);
 
-        for (String carrentAddress: libraryService.getAddressOfLibraries(searchingBook)){
-            System.out.println(carrentAddress);
-        }
+//        for (String carrentAddress: libraryService.getAddressOfLibraries(searchingBook)){
+//            System.out.println(carrentAddress);
+//        }
+        Person person1 = new Person(1,"Vasyl", "Petrenko", Country.SPAIN);
 
         Author searchingAuthor = new Author("Taras", "Shevchenko", Country.UKRAINE);
-        ArrayList<Author> searchingAuthors = new ArrayList<>();
-        searchingAuthors.add(searchingAuthor);
-        for (Library library : libraryService.getListOfLybrariesByAuthor(searchingAuthor)) {
-            System.out.println(library);
+        Author searchingAuthor2 = new Author("Bruce", "Eckel", Country.USA);
+
+        try {
+            for (Library library : libraryService.getListOfLybrariesByAuthor(searchingAuthor, searchingAuthor)) {
+                System.out.println((library.getnumbersOfBook(searchingBook)));
+
+//                library1.getBook(person1, searchingBook);
+//                System.out.println((library.getnumbersOfBook(searchingBook)));
+//                library1.returnBook(person1,searchingBook);
+//                System.out.println((library.getnumbersOfBook(searchingBook)));
+//                library1.returnBook(person1,searchingBook);
+                return;
+            }
+        } catch (Exception ex) {
+            System.err.println(ex);
         }
 
-        System.out.println(libraryService.isThisBookAvailable(searchingBook,library1));
+
+
     }
-    }
+}
 

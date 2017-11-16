@@ -22,7 +22,9 @@ public class LibraryService {
         for (Library currentLibraries : libraries) {
             for (Book currentBook : currentLibraries.getBooks()) {
                 if (currentBook.equals(searchingBook)) {
-                    librariesWithSearchingBook.add(currentLibraries);
+                    if (currentLibraries.isThisBookAvailable(searchingBook)) {
+                        librariesWithSearchingBook.add(currentLibraries);
+                    }
                 }
             }
         }
@@ -31,7 +33,6 @@ public class LibraryService {
         }
         return librariesWithSearchingBook;
     }
-
 
     public List<String> getAddressOfLibraries(Book searchingBook) {
         List<Library> librariesWithSearchingBook = listOfLibrariesWithSearchingBook(searchingBook);
@@ -73,7 +74,7 @@ public class LibraryService {
         return libraryErlier;
     }
 
-    public List<Library> getListOfLybrariesByAuthor(Author... authors) {
+    public List<Library> getListOfLybrariesByAuthor(Author... authors) throws Exception {
         List<Library> lybrariesBySearchingAuthor = new ArrayList<>();
         for (Library currentLibrary : libraries) {
             if (currentLibrary.isBooksBySearchingAuthorInLibrary(authors)) {
@@ -85,10 +86,6 @@ public class LibraryService {
         } else
             System.out.println(lybrariesBySearchingAuthor.toString());
         return lybrariesBySearchingAuthor;
-    }
-
-    public Boolean isThisBookAvailable(Book book, Library library) {
-        return (library.getBookAvailability().getMap().get(book) >= 1);
     }
 
     @Override
