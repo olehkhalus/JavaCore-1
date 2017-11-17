@@ -1,5 +1,6 @@
 package Library;
 
+import javax.swing.plaf.synth.SynthUI;
 import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,6 +10,7 @@ public class Library {
     private LocalTime openingTime;
     private LocalTime endOfWorkTime;
     private Map<Book, Integer > books = new HashMap<>(); // integer is the count of avaluable exemplar of this book in library
+    private Map<Book , Person> listOfTakenBooks = new HashMap<>();
 
     public Library() {
 
@@ -40,8 +42,18 @@ public class Library {
         this.endOfWorkTime = endOfWorkTime;
     }
 
-    public Map<Book, Integer> getBooks() {
+    public Map<Book , Integer> getBooks() {
         return books;
+    }
+    public void setBooks(Map<Book , Integer> books ){
+        this.listOfTakenBooks = listOfTakenBooks;
+    }
+
+    public Map<Book , Person> getTakenBooks() {
+        return listOfTakenBooks;
+    }
+    public void setTakenBooks(){
+        this.books = books;
     }
 
     public void addBook( Book book , Integer NumberOfBooks ) {
@@ -63,6 +75,24 @@ public class Library {
             return false;
         }
     }
+    
+    /*
+    public void takeBook( Book book , Person person , Library library){
+        if ( library.isBookAvailable(book) ){
+            Map<Book, Integer> mapBooks = library.getBooks();
+            for (Map.Entry<Book , Integer> e : mapBooks.entrySet()) {
+                if ( !mapBooks.containsKey(book)){
+                    mapBooks.put(book , e.getValue()-1);
+                    library.setBooks(mapBooks);
+
+                }
+            }
+        } else {
+            System.out.println("Searched book is not available in this library");
+        }
+    }
+     */
+
 
     @Override
     public String toString() {
