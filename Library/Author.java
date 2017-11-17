@@ -15,18 +15,17 @@ public class Author {
         this.lastName = lastName;
     }
 
-    public String getName() {						
-        //return firstName.concat(lastName);
-    	return firstName+" "+lastName;     // Don't work properly when try to use with "==" !?
+    public String getName() {
+        return firstName+" "+lastName;     
     }
-    
+
     public String getFirstName() {
         return firstName;
     }
     public String getLastName() {
         return lastName;
     }
-    
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
