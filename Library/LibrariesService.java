@@ -24,66 +24,87 @@ public class LibrariesService {
         List<Library> res = new ArrayList<Library>();
 
         for ( Library library : listOfLibraries) {
-        	
+
             if (library.isBookInLibrary(book) && library.isBookAvailable(book) ) {
                 res.add(library);
             }
         }
 
-        Collections.sort(res, (Library o2 , Library o1) 
-        	-> {return o2.getOpeningTime().compareTo(o1.getOpeningTime());}
+        Collections.sort(res, (Library o2 , Library o1)
+                -> {return o2.getOpeningTime().compareTo(o1.getOpeningTime());}
         );
-           
+
 
         return res;
     }
-    
+
     public List<Library> findBookByName(String bookName) {
         List<Library> res = new ArrayList<Library>();
-        
-        for ( Library library : listOfLibraries) {        	
-        	Map<Book, Integer> map = library.getBooks();
-        	
+
+        for ( Library library : listOfLibraries) {
+            Map<Book, Integer> map = library.getBooks();
+
             for(Map.Entry<Book , Integer> e : map.entrySet()) {
                 if ( e.getKey().getBookName() == bookName ) {
-                	if ( library.isBookAvailable(e.getKey()) ) {
-                		res.add(library);
-                	}
+                    if ( library.isBookAvailable(e.getKey()) ) {
+                        res.add(library);
+                    }
                 }
             }
         }
 
-        Collections.sort(res, (Library o2 , Library o1) 
-        	-> {return o2.getOpeningTime().compareTo(o1.getOpeningTime());}
+        Collections.sort(res, (Library o2 , Library o1)
+                -> {return o2.getOpeningTime().compareTo(o1.getOpeningTime());}
         );
-           
+
 
         return res;
     }
 
-    public Map<Library, String> findLibraryWhithAuthor( String authorName) {
-    	Map<Library, String> mapLibraries = new HashMap<>();
-    	
-    	for ( Library library : listOfLibraries ) {
-    		
-    		int authorBooksCount = 0 ;
-    		
-    		Map<Book, Integer> mapBooks = library.getBooks();
-        	
-        	for(Map.Entry<Book , Integer> e : mapBooks.entrySet()) {
-                if ( e.getKey().getBookAuthor().getFirstName() == authorName ) {     // If use getName() , it don't work!?
-                	authorBooksCount++;
+    public Map<Library , String> findLibraryWhithAuthor ( Author author) {
+        Map<Library, String> mapLibraries = new HashMap<>();
+
+        for ( Library library : listOfLibraries ) {
+
+            int authorBooksCount = 0 ;
+
+            Map<Book, Integer> mapBooks = library.getBooks();
+
+            for(Map.Entry<Book , Integer> e : mapBooks.entrySet()) {
+                if ( e.getKey().getBookAuthor().equals(author) ) {
+                    authorBooksCount++;
                 }
             }
-        	
-        	if ( authorBooksCount > 0) {
-        		mapLibraries.put(library, "Number of books by this author in library: "+authorBooksCount);
-        	}	
-    	}
-    	
-    	return mapLibraries;
+
+            if ( authorBooksCount > 0) {
+                mapLibraries.put(library, "Number of books by this author in library: "+authorBooksCount);
+            }
+        }
+        return mapLibraries;
     }
-    
+
+    public Map<Library, String> findLibraryWhithAuthorName( String authorName) {
+        Map<Library, String> mapLibraries = new HashMap<>();
+
+        for ( Library library : listOfLibraries ) {
+
+            int authorBooksCount = 0 ;
+
+            Map<Book, Integer> mapBooks = library.getBooks();
+
+            for(Map.Entry<Book , Integer> e : mapBooks.entrySet()) {
+                if ( e.getKey().getBookAuthor().getName().equals(authorName) ) {
+                    authorBooksCount++;
+                }
+            }
+
+            if ( authorBooksCount > 0) {
+                mapLibraries.put(library, "Number of books by this author in library: "+authorBooksCount);
+            }
+        }
+        return mapLibraries;
+    }
+
     public List<Library> findBookRightNow(Book book) {
 
         List<Library> res = new ArrayList<Library>();
@@ -95,10 +116,10 @@ public class LibrariesService {
                 }
             }
         }
-        
-        Collections.sort(res, (Library o1 , Library o2) 
-            	-> {return o1.getOpeningTime().compareTo(o2.getOpeningTime());}
-            );
+
+        Collections.sort(res, (Library o1 , Library o2)
+                -> {return o1.getOpeningTime().compareTo(o2.getOpeningTime());}
+        );
 
         return res;
     }
