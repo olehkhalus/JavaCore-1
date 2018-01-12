@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="model">
+    <class name="model.Author" table="authors" schema="libraries2">
+        <id name="id">
+            <column name="id_author" sql-type="int(11)"/>
+            <generator class="identity" />
+        </id>
+        <property name="firstName">
+            <column name="firstname" sql-type="varchar(70)" length="70"/>
+        </property>
+        <property name="lastName">
+            <column name="lastname" sql-type="varchar(70)" length="70"/>
+        </property>
+        <property name="country">
+            <column name="country" sql-type="varchar(70)" length="70"/>
+            <type name="org.hibernate.type.EnumType">
+                <param name="useNamed">true</param>
+                <param name="enumClass">model.Country</param>
+            </type>
+           </property>
+
+        <!--<discriminator column="DISCRIMINATOR" type="string" />-->
+        <!--<subclass name="Person" extends="model.Author" discriminator-value="P">-->
+            <!--<property name="id"  column="id" />-->
+            <!--<property name="lastName" column="lastname" />-->
+            <!--<property name="country" column="country" />-->
+        <!--</subclass>-->
+    </class>
+</hibernate-mapping>
+

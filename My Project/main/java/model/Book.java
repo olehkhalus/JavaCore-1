@@ -1,31 +1,29 @@
-package Books;
+package model;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Book {
+    private Integer id;
     private String name;
     private List<Author> authors;
 
     public String getName() {
         return name;
     }
+    public void setId(Integer iDBook) { this.id = iDBook; }
+    public Integer getId() { return id; }
 
     public List<Author> getAuthors() {
         return authors;
     }
+    public void setName(String name){this.name = name;}
+    public void setAuthors(List<Author>authors){this.authors = authors;}
 
     public Book(){}
     public Book(String name, ArrayList<Author> authors){
         this.name = name;
         this.authors = authors;
-    }
-    public Book setBookForCompare(String nameOfBook, String nameAuthor, String lastNameAythor, Country countryAuthor){
-        Author authorForCompare = new Author(nameAuthor,lastNameAythor,countryAuthor);
-        ArrayList<Author> authorArrayList = new ArrayList<>();
-        authorArrayList.add(authorForCompare);
-        Book bookForCompare = new Book(nameOfBook, authorArrayList);
-        return bookForCompare;
     }
 
     @Override

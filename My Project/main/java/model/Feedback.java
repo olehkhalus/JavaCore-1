@@ -1,4 +1,4 @@
-package Feedback;
+package model;
 
 public class Feedback {
    private Integer rating;
@@ -14,26 +14,18 @@ public class Feedback {
    }
 
     public Integer getRating() {
-        return rating;
-    }
-
-    public void setRating(Integer rating) {
-        this.rating = rating;
+       return rating;
     }
 
     public String getReview() {
-        return review;
-    }
-
-    public void setReview(String review) {
-        this.review = review;
+       return review;
     }
 
     public Boolean getTypeFeedback() {
-        return typeFeedback;
+       return typeFeedback;
     }
 
     public void setTypeFeedback(Boolean typeFeedback) {
-        this.typeFeedback = typeFeedback;
+       this.typeFeedback = typeFeedback;
     }
 }

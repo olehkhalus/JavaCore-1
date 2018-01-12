@@ -1,7 +1,8 @@
-package Feedback;
+package model;
 
-import Books.Book;
-import Books.Person;
+import model.Book;
+import model.Feedback;
+import model.Person;
 
 public class FeedbackBookPerson {
    private Person person;
@@ -18,19 +19,12 @@ public class FeedbackBookPerson {
     public Person getPerson() {
         return person;
     }
-    public void setPerson(Person person) {
-        this.person = person;
-    }
+
     public Feedback getFeedback() {
         return feedback;
     }
-    public void setFeedback(Feedback feedback) {
-        this.feedback = feedback;
-    }
+
     public Book getBook() {
         return book;
-    }
-    public void setBook(Book book) {
-        this.book = book;
     }
 }

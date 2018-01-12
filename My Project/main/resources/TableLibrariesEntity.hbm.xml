@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="model.Library" table="table_libraries" schema="libraries2">
+        <id name="iDLibrary">
+            <column name="id_library" sql-type="int(11)"/>
+            <generator class="identity" />
+        </id>
+        <property name="address">
+            <column name="address" sql-type="varchar(100)" length="100"/>
+        </property>
+        <property name="timeOfWorkBegin">
+            <column name="timeOfWorkBegin" sql-type="TIME" />
+        </property>
+        <property name="timeOfWorkClose">
+            <column name="timeOfWorkClose" sql-type="TIME" />
+        </property>
+        <map name="mapBooksAndCount" table="libraries_books" lazy="false" cascade="all">
+            <key column="id_library"/>
+            <index-many-to-many column="id_book"
+                                class="model.Book"/>
+            <element column="quantity_books" type="int"/>
+        </map>
+        <!--<set name="books" table="libraries_books" lazy="false" cascade="all" >-->
+            <!--<key>-->
+                <!--<column name="id_library" not-null="true" />-->
+            <!--</key>-->
+            <!--<many-to-many entity-name="model.Book">-->
+                <!--<column name="id_book" not-null="true" />-->
+            <!--</many-to-many>-->
+        <!--</set>-->
+    </class>
+</hibernate-mapping>

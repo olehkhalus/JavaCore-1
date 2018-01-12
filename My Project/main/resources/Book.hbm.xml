@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="model.Book" table="books" schema="libraries2">
+        <id name="id">
+            <column name="id_book" sql-type="int(11)"/>
+            <generator class="identity" />
+        </id>
+        <property name="name">
+            <column name="book_name" sql-type="varchar(80)" length="80" not-null="true"/>
+        </property>
+        <list name="authors" table="relations" lazy="false" cascade="all">
+            <key>
+                <column name="id_book" not-null="true" />
+            </key>
+            <list-index/>
+            <many-to-many entity-name="model.Author">
+                <column name="id_author" not-null="true" />
+            </many-to-many>
+        </list>
+
+        <!--<set name="Authors" table="relations" cascade="all" lazy="false">
+            <key column="id_book"></key>
+            <many-to-many column="id_author" class="model.Author"></many-to-many>
+        </set>-->
+       <!-- <set name="professors" table="STUDPROF" cascade="all" lazy="false">
+            <key column="SID"></key>
+            <many-to-many column="PID" class="Professor"></many-to-many>
+        </set>-->
+
+    </class>
+</hibernate-mapping>
